@@ -14,7 +14,7 @@ be of the correct format, specificaly regaring spacing, the correct number
 of values provided for the resource count, the format of the first two lines,
 and the '|' character seperating each catigory of data. 
 In addition, it is expected that the input file be located in the same folder
-as this file, though you can change the desired input file on line 27 so long
+as this file, though you can change the desired input file on line 39 so long
 as the new file is also in the correct format.
 Finaly, you must have at least one resource and at least two processes. 
 */
@@ -26,13 +26,17 @@ int main(){
 
     int numOfResources = 0;
     vector<int> avalible; //always one for each resource
+
+    bool finished[max.size()]; //if true value has been added to the stack
+    vector<int> sequence;
+    bool isSafe = true;
     
     //blank vector for matnence
     vector<int> empty;
 
 
     //verify file opens properly
-    std::ifstream input("input.txt");
+    std::ifstream input("input3.txt");
     if(input.fail()){
         cout << "cannot open file" << endl;
         exit(1); 
@@ -109,12 +113,16 @@ int main(){
 
     input.close();
 
+
+
+
     //set up need
 
     for(int i = 0; i < max.size(); ++i){
         need.push_back(empty);
         for(int j = 0; j < numOfResources; ++j){
             need[i].push_back((max[i][j] - allocation[i][j]));
+            if (need[i][j] < 0) isSafe = false;
         }
     }
 
@@ -164,9 +172,7 @@ int main(){
     //the bankers algorithm
 
 
-    bool finished[max.size()]; //if true value has been added to the stack
-    vector<int> sequence;
-    bool isSafe = true;
+    
     for(int done = 0; done < max.size(); ++done){  //will iterate once for each process, or untill declared unsafe
         for(int i = 0; i < max.size(); ++i){  //checks from process 0 to final process for one that needs done and needs less than avalible
             if(!finished[i]){
