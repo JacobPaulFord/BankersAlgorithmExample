@@ -26,6 +26,9 @@ int main(){
 
     int numOfResources = 0;
     vector<int> avalible; //always one for each resource
+    
+    //blank vector for matnence
+    vector<int> empty;
 
 
     //verify file opens properly
@@ -49,20 +52,25 @@ int main(){
     }
 
 
-
     //collect the first line of data
+    allocation.push_back(empty);
+    charInput = '.';
     while(charInput != '|') input >> charInput;
     for(int i = 0; i < numOfResources; ++i){
         input >> intInput;
         allocation[0].push_back(intInput);
     }
 
+    
+    max.push_back(empty);
+    charInput = '.';
     while(charInput != '|') input >> charInput;
     for(int i = 0; i < numOfResources; ++i){
         input >> intInput;
         max[0].push_back(intInput);
     }
 
+    charInput = '.';
     while(charInput != '|') input >> charInput;
     for(int i = 0; i < numOfResources; ++i){
         input >> intInput;
@@ -72,28 +80,35 @@ int main(){
 
     //continues looping through till all information is gathered
     int iterationNum = 0;
+    charInput = '.';
     while(charInput != '|') input >> charInput;
     while(!input.eof()){
         ++iterationNum;
 
+        allocation.push_back(empty);
         for(int i = 0; i < numOfResources; ++i){
             input >> intInput;
             allocation[iterationNum].push_back(intInput);
         }
 
+        max.push_back(empty);
+        charInput = '.';
         while(charInput != '|') input >> charInput;
         for(int i = 0; i < numOfResources; ++i){
             input >> intInput;
             max[iterationNum].push_back(intInput);
         }
 
+        charInput = '.';
         while(charInput != '|') input >> charInput;
 
         //set up start of next line, or find end of file
-        while(charInput != '|' && !input.eof()) input >> charInput;
+        charInput = '.';
+        while(charInput != '|' && !input.eof()) {input >> charInput;}
     }
 
     input.close();
+
 
     //testing that everything is read in properly
     cout << "resources: " << numOfResources << endl << endl;
@@ -123,6 +138,5 @@ int main(){
         cout << endl;
     }
     cout << endl << endl;
-
 
 }
