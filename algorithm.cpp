@@ -109,9 +109,20 @@ int main(){
 
     input.close();
 
+    //set up need
+
+    for(int i = 0; i < max.size(); ++i){
+        need.push_back(empty);
+        for(int j = 0; j < numOfResources; ++j){
+            need[i].push_back((max[i][j] - allocation[i][j]));
+        }
+    }
+
+
+
 
     //testing that everything is read in properly
-    cout << "resources: " << numOfResources << endl << endl;
+    cout << "Amount of resources: " << numOfResources << endl << endl;
     cout << "Avalible: " << endl;
     for(auto e:avalible){
         cout << e;
@@ -138,5 +149,60 @@ int main(){
         cout << endl;
     }
     cout << endl << endl;
+
+    cout << "Need: " << endl;
+    for(auto e:need){
+        for(auto e2:e){
+            cout << e2;
+            cout << " ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
+
+
+    //the bankers algorithm
+
+
+    bool finished[max.size()]; //if true value has been added to the stack
+    vector<int> sequence;
+    bool isSafe = true;
+    for(int done = 0; done < max.size(); ++done){  //will iterate once for each process, or untill declared unsafe
+        for(int i = 0; i < max.size(); ++i){  //checks from process 0 to final process for one that needs done and needs less than avalible
+            if(!finished[i]){
+                bool isLessNeed = true;
+                for(int j = 0; j < numOfResources; ++j){
+                    if(avalible[j] < need[i][j]) isLessNeed = false;
+                }
+
+                if(isLessNeed){  //if next in sequence is found, take back allocated resources and mark process as done
+                    sequence.push_back(i);
+                    finished[i] = true;
+                    for(int j = 0; j < numOfResources; ++j){
+                        avalible[j] += allocation[i][j];
+                    }
+                    break;
+                }
+            }
+
+            if(i == max.size()-1){isSafe = false;}  //if it checks all processes and make it to this command, system is not safe
+        }
+
+        if(!isSafe){break;}
+    }
+
+
+    if(isSafe){
+        cout << "This is a safe system." << endl;
+        cout << "A safe sequence is: ";
+        for(auto e:sequence){
+            cout << "P" << e << " ";
+        }
+        cout << endl << endl;
+    }else{
+        cout << "This is not a safe system" << endl;
+    }
+
+    
 
 }
