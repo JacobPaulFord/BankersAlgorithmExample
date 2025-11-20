@@ -12,9 +12,9 @@ And run with the command:
   ./algorithm.exe
   
 For your traditional unix based system. 
-
-
-
+    
+  
+    
 A description of the files provided (by folder)
 
 Documentation:
