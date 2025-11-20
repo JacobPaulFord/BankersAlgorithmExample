@@ -4,10 +4,13 @@ An example implementation of the Bankers algorithm for determining if a system i
 
 No additional actions need to be taken beyond normal comalation for this program, 
   short of needing the input files to be in the same folder as the program.
+  
 As such, compile with the command:
   g++ algorithm.cpp -o algorithm.exe
+  
 And run with the command:
   ./algorithm.exe
+  
 For your traditional unix based system. 
 
 
