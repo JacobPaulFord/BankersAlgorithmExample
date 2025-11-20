@@ -15,7 +15,7 @@ For your traditional unix based system.
     
   
     
-A description of the files provided (by folder)
+<ins>A description of the files provided (by folder)</ins>
 
 Documentation:
 1) Documentation.pdf
