@@ -10,7 +10,9 @@ And run with the command:
   ./algorithm.exe
 For your traditional unix based system. 
 
-Files provided (by folder)
+
+
+A description of the files provided (by folder)
 
 Documentation:
 1) Documentation.pdf
