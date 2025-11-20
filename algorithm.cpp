@@ -36,7 +36,7 @@ int main(){
 
 
     //verify file opens properly
-    std::ifstream input("input3.txt");
+    std::ifstream input("input.txt");
     if(input.fail()){
         cout << "cannot open file" << endl;
         exit(1); 
